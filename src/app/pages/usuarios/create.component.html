@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" formControlName="name" class="form-control" placeholder="Ingrese el nombre usuario">
+    </div>
+    <div class="form-group">
+      <label for="cedula">Cedula:</label>
+      <input type="text" id="cedula" formControlName="cedula" class="form-control" placeholder="Ingrese cedula..">
+    </div>
+    <div class="form-group">
+      <label for="telefono">Telefono:</label>
+      <input type="text" id="telefono" formControlName="telefono" class="form-control" placeholder="Ingrese el telefono del usuario">
+    </div>
+    <div class="form-group">
+      <label for="direccion">Direccion:</label>
+      <input type="text" id="direccion" formControlName="direccion" class="form-control" placeholder="Ingrese direccion">
+    </div>
+    <div class="form-group">
+      <label for="email">email:</label>
+      <textarea id="email" formControlName="email" class="form-control" placeholder="Ingrese correo"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <textarea id="password" formControlName="password" class="form-control" placeholder="Ingrese contraseña"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="role">Seleccionar Rol</label>
+      <select id="role" formControlName="role" class="form-control">
+        <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+        <option value="EMPLEADO">EMPLEADO</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Crear Usuario</button>
+  </form>
+
+</div>

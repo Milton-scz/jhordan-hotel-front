@@ -1,0 +1,65 @@
+<div class="container mt-5">
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="numeroHabitacion">Número de Habitación:</label>
+      <input type="number" id="numeroHabitacion" formControlName="numeroHabitacion" class="form-control" placeholder="Ingrese el número de habitación" required>
+    </div>
+    <div class="form-group">
+      <label for="capacidad">Capacidad:</label>
+      <input type="number" id="capacidad" formControlName="capacidad" class="form-control" placeholder="Ingrese la capacidad" required>
+    </div>
+    <div class="form-group">
+      <label for="detalles">Detalles:</label>
+      <textarea id="detalles" formControlName="detalles" class="form-control" placeholder="Ingrese detalles de la habitación" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="precioPorNoche">Precio por Noche:</label>
+      <input type="number" id="precioPorNoche" formControlName="precioPorNoche" class="form-control" placeholder="Ingrese el precio por noche" required>
+    </div>
+    <div class="form-group">
+      <label for="tipo">Tipo de Habitación:</label>
+      <select id="tipo" formControlName="tipo" class="form-control" required>
+        <option value="SIMPLE">SIMPLE</option>
+        <option value="DOBLE">DOBLE</option>
+        <option value="SUITE">SUITE</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <select id="estado" formControlName="estado" class="form-control" required>
+        <option value="DISPONIBLE">Disponible</option>
+        <option value="RESERVADO">Reservado</option>
+        <option value="OCUPADO">Ocupado</option>
+        <option value="MANTENIMIENTO">Mantenimiento</option>
+      </select>
+    </div>
+
+    <!-- Select para elegir un dispositivo disponible -->
+    <div class="form-group mt-4">
+      <label for="device" class="h5">Seleccione un Dispositivo:</label>
+      <select
+        id="device"
+        formControlName="device"
+        class="form-control"
+        (change)="onTipoChange()"
+      >
+        <option *ngFor="let device of devices" [value]="device.id"> {{ device.id }}</option>
+      </select>
+      <div *ngIf="form.get('device')?.invalid && form.get('device')?.touched" class="text-danger">
+        El dispositivo es obligatorio.
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Crear Habitación</button>
+  </form>
+</div>

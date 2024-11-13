@@ -1,0 +1,16 @@
+.camera-container {
+  display: flex;  /* Utilizamos flexbox para centrar */
+  justify-content: center;  /* Centra el contenido horizontalmente */
+  align-items: center;  /* Centra el contenido verticalmente */
+  width: 420px;  /* Ancho del contenedor de la cámara */
+  height: 340px;  /* Alto del contenedor de la cámara */
+  margin: 0 auto;  /* Centra el contenedor dentro de su contenedor padre */
+  border: 2px solid #ccc;  /* Opcional: agrega un borde para definir el área */
+  border-radius: 8px;  /* Opcional: agrega bordes redondeados */
+}
+
+#video {
+  width: 60%;  /* Asegura que el video ocupe todo el ancho del contenedor */
+  height: 60%;  /* Asegura que el video ocupe todo el alto del contenedor */
+  object-fit: cover;  /* Mantiene la proporción del video sin distorsionarse */
+}

@@ -1,0 +1,112 @@
+<div class="container py-4">
+  <!-- Título de la sección -->
+  <h2 class="text-center mb-4">Crear Recepción</h2>
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <!-- Detalles de la habitación -->
+  <div *ngIf="habitacionId" class="card mb-4">
+    <div class="card-header">
+      <h5>Detalles de la Habitación</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <p><strong>Número de Habitación:</strong> {{ form.get('numeroHabitacion')?.value }}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Tipo de Habitación:</strong> {{ form.get('tipoHabitacion')?.value }}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Descripción:</strong> {{ form.get('descripcionHabitacion')?.value }}</p>
+        </div>
+        <div class="col-md-4 bg-success text-white rounded">
+          <p><strong>Estado:</strong> {{ form.get('estadoHabitacion')?.value }}</p>
+      </div>
+
+        <div class="col-md-4">
+          <p><strong>Precio por Noche:</strong> {{ form.get('precioHabitacion')?.value | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Formulario de recepción -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+    <div class="card-header">
+      <h5>Formulario de Recepción</h5>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="cedula"><strong>Cliente:</strong></label>
+        <select id="cedula" formControlName="cedula" class="form-control">
+          <option *ngFor="let user of users" [value]="user.cedula">{{ user.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="paqueteId"><strong>Paquete:</strong></label>
+        <select id="paqueteId" formControlName="paqueteId" class="form-control">
+          <option *ngFor="let paquete of paquetes" [value]="paquete.paqueteId">{{ paquete.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="fechaEntrada"><strong>Fecha de Entrada:</strong></label>
+          <input type="date" id="fechaEntrada" formControlName="fechaEntrada" class="form-control" (change)="onDateChange()">
+        </div>
+        <div class="col-md-6">
+          <label for="fechaSalida"><strong>Fecha de Salida:</strong></label>
+          <input type="date" id="fechaSalida" formControlName="fechaSalida" class="form-control" (change)="onDateChange()">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="adelanto"><strong>Adelanto:</strong></label>
+          <input type="number" id="adelanto" formControlName="adelanto" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="descuento"><strong>Descuento:</strong></label>
+          <input type="number" id="descuento" formControlName="descuento" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="totalAPagar"><strong>Total a Pagar:</strong></label>
+          <input type="number" id="totalAPagar" formControlName="totalAPagar" class="form-control" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tipo"><strong>Tipo de Registro:</strong></label>
+        <select id="tipo" formControlName="tipo" class="form-control">
+          <option value="HOSPEDAJE">Hospedaje</option>
+          <option value="RESERVA">Reserva</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="preferencias"><strong>Preferencias:</strong></label>
+        <textarea id="preferencias" formControlName="preferencias" class="form-control"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="observaciones"><strong>Observaciones:</strong></label>
+        <textarea id="observaciones" formControlName="observaciones" class="form-control"></textarea>
+      </div>
+    </div>
+
+    <div class="card-footer text-center">
+      <a [routerLink]="['/recepciones']" class="bg-danger hover:bg-danger-dark text-white font-bold py-2 px-4 rounded-lg">
+        Volver Atrás
+    </a>
+      <button type="submit" class="btn btn-primary">Agregar Recepción</button>
+    </div>
+  </form>
+</div>
